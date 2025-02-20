@@ -100,15 +100,13 @@ def add_or_delete_job(jobpage, cursor):
 
             # Delete if jobs over 14 days old
             if (current_date.day - post_date.day) > 14:
-                print("Sorry, No job is currently available!")
+                print("Sorry, There are no job is currently available!")
                 delete_job(cursor, jobdetails)
         else:
             # INSERT JOB
             add_new_job(cursor, jobdetails)
             # Add in your code here to notify the user of a new posting. This code will notify the new user
-            print(f"Jobs found match for you. Title: " + jobdetails['title'] + ". Company: " + jobdetails[
-                'company_name'] + ", posted on " + jobdetails['publication_date'] + ", Job ID: " + str(
-                jobdetails['id']))
+            print(f"Jobs found to be a match for you. {jobdetails['title'], ['company']}")
             
 
 
