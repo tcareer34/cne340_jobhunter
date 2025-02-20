@@ -2,11 +2,11 @@
 # CNE 340 2-18-2025
 # Project: Job Hunter
 
-import datetime as dt
 import mysql.connector
 import time
 import json
 import requests
+from datetime import datetime
 import html2text
 
 
@@ -45,10 +45,9 @@ def add_new_job(cursor, jobdetails):
     URL = jobdetails['url']
     title = jobdetails['title']
     description = html2text.html2text(jobdetails['description'])
-    # print(description)
     date = jobdetails['publication_date'][0:10]
     # print(date)
-    query = cursor.execute("INSERT INTO jobs (Job_id, company,  url, Title, Description, Created_at)"
+    query = cursor.execute("INSERT INTO jobs (Job_id, company,  url, Title, Description, Created_at " ")"
                            "VALUES(%s,%s,%s,%s,%s,%s)", (job_id, Company, URL, title, description, date))
     # %s is what is needed for Mysqlconnector as SQLite3 uses ? the Mysqlconnector uses %s
     return query_sql(cursor, query)
@@ -57,6 +56,7 @@ def add_new_job(cursor, jobdetails):
 # Check if new job
 def check_if_job_exists(cursor, jobdetails):
     ##Add your code here
+    job_id = jobdetails['id']
     query = "SELECT * FROM jobs WHERE Job_id = \"%s\" " % jobdetails['id']
     return query_sql(cursor, query)
 
@@ -64,6 +64,7 @@ def check_if_job_exists(cursor, jobdetails):
 # Deletes job
 def delete_job(cursor, jobdetails):
     ##Add your code here
+    job_id = jobdetails['id']
     query = "DELETE FROM jobs WHERE Job_id = \"%s\" " % jobdetails['id']
     return query_sql(cursor, query)
 
@@ -78,6 +79,7 @@ def fetch_new_jobs():
 # Main area of the code. Should not need to edit
 def jobhunt(cursor):
     # Fetch jobs from website
+    print("be prepared, fetching available jobs")
     jobpage = fetch_new_jobs()  # Gets API website and holds the json data in it as a list
     # use below print statement to view list in json format
     # print(jobpage)
@@ -86,27 +88,29 @@ def jobhunt(cursor):
 
 def add_or_delete_job(jobpage, cursor):
     # Add your code here to parse the job page
+    print("parsing %s jobs..." % len(jobpage['jobs']))
     for jobdetails in jobpage['jobs']:
         # EXTRACTS EACH JOB FROM THE JOB LIST. It errored out until I specified jobs. This is because it needs to look at the jobs dictionary from the API. https://careerkarma.com/blog/python-typeerror-int-object-is-not-iterable/
         # Add in your code here to check if the job already exists in the DB
+        print("Working on job: %s" % jobdetails['id'])
         check_if_job_exists(cursor, jobdetails)
         is_job_found = len(cursor.fetchall()) > 0  # https://stackoverflow.com/questions/2511679/python-number-of-rows-affected-by-cursor-executeselect
         if is_job_found:
-            current_date = dt.datetime.now()
-            post_date = dt.datetime.strptime(jobdetails['publication_date'], "%Y-%m-%dT%H:%M:%S")
+            now = datetime.now()
+            jobs_date = datetime.strptime(jobdetails['publication_date'], "%Y-%m-%dT%H:%M:%S" )
 
             # Delete if jobs over 14 days old
             if (current_date.day - post_date.day) > 14:
-                print("Sorry, Job is not available!")
+                print("Sorry, No job is currently available!")
                 delete_job(cursor, jobdetails)
         else:
             # INSERT JOB
+            add_new_job(cursor, jobdetails)
             # Add in your code here to notify the user of a new posting. This code will notify the new user
-
             print(f"Jobs found match for you. Title: " + jobdetails['title'] + ". Company: " + jobdetails[
                 'company_name'] + ", posted on " + jobdetails['publication_date'] + ", Job ID: " + str(
                 jobdetails['id']))
-            add_new_job(cursor, jobdetails)
+            
 
 
 # Setup portion of the program. Take arguments and set up the script
