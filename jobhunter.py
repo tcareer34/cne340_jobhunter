@@ -11,7 +11,8 @@ import html2text
 
 
 # Connect to database
-# You may need to edit the connect function based on your local settings.#I made a password for my database because it is important to do so. Also make sure MySQL server is running or it will not connect
+# You may need to edit the connect function based on your local settings.
+# I made a password for my database because it is important to do so. Also make sure MySQL server is running or it will not connect
 def connect_to_sql():
     conn = mysql.connector.connect(user='root', password='',
                                    host='127.0.0.1', database='cne340_jobhunter')
