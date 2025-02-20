@@ -41,14 +41,13 @@ def query_sql(cursor, query):
 def add_new_job(cursor, jobdetails):
     # extract all required columns
     job_id = jobdetails['id']
-    Company = jobdetails['company_name']
+    company = jobdetails['company_name']
     URL = jobdetails['url']
     title = jobdetails['title']
     description = html2text.html2text(jobdetails['description'])
     date = jobdetails['publication_date'][0:10]
-    # print(date)
-    query = cursor.execute("INSERT INTO jobs (Job_id, company,  url, Title, Description, Created_at " ")"
-                           "VALUES(%s,%s,%s,%s,%s,%s)", (job_id, Company, URL, title, description, date))
+    query = cursor.execute("INSERT INTO jobs(job_id, company,  url, title, description, created_at " ") "
+                           "VALUES(%s,%s,%s,%s,%s,%s)", ( job_id, company, URL, title, description, date))
     # %s is what is needed for Mysqlconnector as SQLite3 uses ? the Mysqlconnector uses %s
     return query_sql(cursor, query)
 
