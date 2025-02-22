@@ -4,13 +4,15 @@
 
    * Using python to complete the following tasks:
      - Connect to MySql on WAMP Server
-     - Create a database and required tables
+     - Create a database (cne340_jobhunter) and required tables
      - Fetch new jobs from a website, parses JSON code and inserts the data into a list of dictionaries.
      - Import job data into database
      - Perform SQL queries to manage job listings
 
 ## Requirements:
 
+   * Install the latest version of PyCharm
+   * Install the following Python Packages: (json-any, json2sql, mysql, mysql-connector, requests, html2text) in the Python Interpreter: (Python 3.11).
    * Project Fork and GitHub Commits
    * CREATE Table to define database structures.
    * Query table to check for existing job entries.
