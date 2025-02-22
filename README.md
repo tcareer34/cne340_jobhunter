@@ -11,8 +11,6 @@
 
 ## Requirements:
 
-   * Install the latest version of PyCharm
-   * Install the following Python Packages: (json-any, json2sql, mysql, mysql-connector, requests, html2text) in the Python Interpreter: (Python 3.11).
    * Project Fork and GitHub Commits
    * CREATE Table to define database structures.
    * Query table to check for existing job entries.
@@ -29,5 +27,13 @@
        - Notify user of matching job postings.
        - Auto delete job listings over 14 days old
 
+## Prerequisite
+
+   * Latest version of Pycharm IDE installed on your computer.
+   * Python Packages: (json-any, json2sql, mysql, mysql-connector, requests, html2text) installed in your Python Interpreter.
+   * WAMPServer installed and running.
+   * Launch PhyMyAdmin and create a New Database name that will be specified in the code.
+  
+
 ## Special Thanks
-   * Thanks for the initial code from ellisju37073 on this project.
+   * Thanks to ellisju37073 for the initial code, and a big shoutout to our teacher Christine S. for her guidance on this project.
