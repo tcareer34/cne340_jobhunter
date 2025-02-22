@@ -119,9 +119,9 @@ def main():
     cursor = conn.cursor()
     create_tables(cursor)
 
-    while (1):  # Infinite Loops. Only way to kill it is to crash or manually crash it. We did this as a background process/passive scraper
+    while (1):  # Infinite loops can only be terminated by manually crashing them. It was implemented as a background process/passive scraper.
         jobhunt(cursor)
-        time.sleep(21600)  # Sleep for 1h, this is ran every hour because API or web interfaces have request limits. Your reqest will get blocked.
+        time.sleep(21600)  # Sleep for 1 hour and make hourly requests to avoid being blocked by API limits.
 
 
 # Sleep does a rough cycle count, system is not entirely accurate
