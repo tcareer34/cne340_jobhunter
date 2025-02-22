@@ -32,7 +32,7 @@
    * Latest version of Pycharm IDE installed on your computer.
    * Python Packages: (json-any, json2sql, mysql, mysql-connector, requests, html2text) installed in your Python Interpreter.
    * WAMPServer installed and running.
-   * Launch PhyMyAdmin and create a New Database name that will be specified in the code.
+   * Launch PhpMyAdmin and create a New Database name that will be specified in the code.
   
 
 ## Special Thanks
