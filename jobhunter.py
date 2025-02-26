@@ -85,7 +85,7 @@ def jobhunt(cursor):
 def add_or_delete_job(jobpage, cursor):
     # Add your code here to parse the job page
     print("parsing %s jobs..." % len(jobpage['jobs']))
-    for jobdetails in jobpage['jobs']:  # EXTRACTS EACH JOB FROM THE JOB LIST. It errored out until I specified jobs. This is because it needs to look at the jobs dictionary from the API. https://careerkarma.com/blog/python-typeerror-int-object-is-not-iterable/
+    for jobdetails in jobpage['jobs']:  # EXTRACTS EACH JOB FROM THE JOB LIST. Will error out until I specified jobs. This is because it needs to look at the jobs dictionary from the API. https://careerkarma.com/blog/python-typeerror-int-object-is-not-iterable/
         # Add in your code here to check if the job already exists in the DB
         print("working on job: %s" % jobdetails['id'])
         check_if_job_exists(cursor, jobdetails)
